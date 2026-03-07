@@ -66,39 +66,28 @@ st.markdown("""
 # ============================================
 @st.cache_data
 def load_main_data():
-    # Try every possible path
     paths = [
         'data/processed/ml_ready_data.csv',
         'data/cloud/main_data.csv',
         '../data/processed/ml_ready_data.csv',
         '../data/cloud/main_data.csv',
-        os.path.join(os.path.dirname(__file__), '..', 'data', 'cloud', 'main_data.csv'),
-        os.path.join(os.path.dirname(__file__), '..', 'data', 'processed', 'ml_ready_data.csv'),
     ]
     for path in paths:
         if os.path.exists(path):
-            df = pd.read_csv(path, parse_dates=['date'])
-            return df, path
-    
-    # Last resort: search for ANY csv in the entire repo
-    import glob
-    for pattern in ['**/main_data.csv', '**/ml_ready_data.csv', '**/dashboard_data.csv']:
-        found = glob.glob(pattern, recursive=True)
-        if found:
-            df = pd.read_csv(found[0], parse_dates=['date'])
-        if df is None:
-            st.error("Data not found!")
-            # Show debug info so we can fix it
-            st.write("**Current directory:**", os.getcwd())
-            st.write("**Files in current dir:**", os.listdir("."))
-            if os.path.exists("data"):
-                st.write("**Files in data/:**", os.listdir("data"))
-                if os.path.exists("data/cloud"):
-                    st.write("**Files in data/cloud/:**", os.listdir("data/cloud"))
-            st.write("**App file location:**", os.path.dirname(__file__))
-            st.stop()
-            return df, found[0]
-    
+            try:
+                df = pd.read_csv(path, parse_dates=['date'])
+                return df, path
+            except Exception as e:
+                st.warning(f"Found {path} but failed to read: {e}")
+                # Try without date parsing
+                try:
+                    df = pd.read_csv(path)
+                    if 'date' in df.columns:
+                        df['date'] = pd.to_datetime(df['date'], errors='coerce')
+                    return df, path
+                except Exception as e2:
+                    st.error(f"Second attempt failed: {e2}")
+                    continue
     return None, None
 import glob
 st.sidebar.markdown("### DEBUG")
