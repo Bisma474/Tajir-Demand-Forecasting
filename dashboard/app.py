@@ -66,17 +66,45 @@ st.markdown("""
 # ============================================
 @st.cache_data
 def load_main_data():
+    # Try every possible path
     paths = [
-        'data/processed/ml_ready_data.csv',       # Full local (794MB)
-        'data/cloud/main_data.csv',                # Cloud version
+        'data/processed/ml_ready_data.csv',
+        'data/cloud/main_data.csv',
         '../data/processed/ml_ready_data.csv',
         '../data/cloud/main_data.csv',
+        os.path.join(os.path.dirname(__file__), '..', 'data', 'cloud', 'main_data.csv'),
+        os.path.join(os.path.dirname(__file__), '..', 'data', 'processed', 'ml_ready_data.csv'),
     ]
     for path in paths:
         if os.path.exists(path):
             df = pd.read_csv(path, parse_dates=['date'])
             return df, path
+    
+    # Last resort: search for ANY csv in the entire repo
+    import glob
+    for pattern in ['**/main_data.csv', '**/ml_ready_data.csv', '**/dashboard_data.csv']:
+        found = glob.glob(pattern, recursive=True)
+        if found:
+            df = pd.read_csv(found[0], parse_dates=['date'])
+        if df is None:
+            st.error("Data not found!")
+            # Show debug info so we can fix it
+            st.write("**Current directory:**", os.getcwd())
+            st.write("**Files in current dir:**", os.listdir("."))
+            if os.path.exists("data"):
+                st.write("**Files in data/:**", os.listdir("data"))
+                if os.path.exists("data/cloud"):
+                    st.write("**Files in data/cloud/:**", os.listdir("data/cloud"))
+            st.write("**App file location:**", os.path.dirname(__file__))
+            st.stop()
+            return df, found[0]
+    
     return None, None
+import glob
+st.sidebar.markdown("### DEBUG")
+st.sidebar.write("CWD:", os.getcwd())
+st.sidebar.write("Files in data/cloud/:", os.listdir("data/cloud") if os.path.exists("data/cloud") else "FOLDER NOT FOUND")
+st.sidebar.write("Files in root:", [f for f in os.listdir(".") if not f.startswith(".")])
 
 
 @st.cache_data
