@@ -1,0 +1,14 @@
+store_id,family,city,tajir_category,alert_level,alert_reason,consecutive_zeros,avg_daily_demand,predicted_demand,suggested_order,date
+16,BABY CARE,Santo Domingo,FMCG,MEDIUM,"Stockout today, predicted demand (0) above average (0)",2,0.3,0.4,2.0,2017-08-15
+10,BABY CARE,Quito,FMCG,MEDIUM,"Stockout today, predicted demand (0) above average (0)",184,0.0,0.4,0.0,2017-08-15
+12,BABY CARE,Latacunga,FMCG,MEDIUM,"Stockout today, predicted demand (0) above average (0)",63,0.0,0.4,0.0,2017-08-15
+22,BABY CARE,Puyo,FMCG,MEDIUM,"Stockout today, predicted demand (0) above average (0)",8,0.0,0.4,0.0,2017-08-15
+28,BABY CARE,Guayaquil,FMCG,MEDIUM,"Stockout today, predicted demand (0) above average (0)",42,0.0,0.4,0.0,2017-08-15
+32,BABY CARE,Guayaquil,FMCG,MEDIUM,"Stockout today, predicted demand (0) above average (0)",161,0.0,0.4,0.0,2017-08-15
+33,BABY CARE,Quevedo,FMCG,MEDIUM,"Stockout today, predicted demand (0) above average (0)",151,0.0,0.4,0.0,2017-08-15
+35,BABY CARE,Playas,FMCG,MEDIUM,"Stockout today, predicted demand (0) above average (0)",46,0.0,0.4,0.0,2017-08-15
+36,BABY CARE,Libertad,FMCG,MEDIUM,"Stockout today, predicted demand (0) above average (0)",31,0.0,0.4,0.0,2017-08-15
+40,BABY CARE,Machala,FMCG,MEDIUM,"Stockout today, predicted demand (0) above average (0)",14,0.0,0.4,0.0,2017-08-15
+43,BABY CARE,Esmeraldas,FMCG,MEDIUM,"Stockout today, predicted demand (0) above average (0)",12,0.0,0.4,0.0,2017-08-15
+54,BABY CARE,El Carmen,FMCG,MEDIUM,"Stockout today, predicted demand (0) above average (0)",186,0.0,0.4,0.0,2017-08-15
+26,LAWN AND GARDEN,Guayaquil,Non-Food,LOW,Stockout today for product with avg demand 5,1,5.4,2.6,38.0,2017-08-15
