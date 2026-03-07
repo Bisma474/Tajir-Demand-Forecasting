@@ -316,11 +316,11 @@ elif page == "🚨 Stockout Analysis":
     df, data_source = load_main_data()
 
 # DEBUG: Show what files exist (remove after fixing)
-import glob
-st.sidebar.markdown("### DEBUG")
-st.sidebar.write("CWD:", os.getcwd())
-st.sidebar.write("Files in data/cloud/:", os.listdir("data/cloud") if os.path.exists("data/cloud") else "FOLDER NOT FOUND")
-st.sidebar.write("Files in root:", [f for f in os.listdir(".") if not f.startswith(".")])
+    import glob
+    st.sidebar.markdown("### DEBUG")
+    st.sidebar.write("CWD:", os.getcwd())
+    st.sidebar.write("Files in data/cloud/:", os.listdir("data/cloud") if os.path.exists("data/cloud") else "FOLDER NOT FOUND")
+    st.sidebar.write("Files in root:", [f for f in os.listdir(".") if not f.startswith(".")])
     with col_left:
         st.subheader("🏪 Stockout by Store Type")
         if 'store_type' in filtered_df.columns and 'is_zero_sale' in filtered_df.columns:
